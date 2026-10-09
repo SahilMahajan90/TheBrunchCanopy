@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Brunch Company – Feedback</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fbf3dc;--card:#fffaf0;--ink:#2a2a22;--green:#1f5a3a;--red:#a31621;--line:#e3d6b0;--chip:#f3e8c6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1b1f1a;--card:#262b24;--ink:#f1ecd9;--green:#6cc08f;--red:#ff7b86;--line:#3a4136;--chip:#323a2f}}
+:root[data-theme="dark"]{--bg:#1b1f1a;--card:#262b24;--ink:#f1ecd9;--green:#6cc08f;--red:#ff7b86;--line:#3a4136;--chip:#323a2f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.4}
+.wrap{max-width:520px;margin:0 auto;padding:20px 16px 40px}
+h1{font-family:Georgia,serif;color:var(--red);margin:4px 0;font-size:28px;text-align:center}
+.sub{text-align:center;color:var(--green);font-weight:600;margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+label.q,.q{display:block;font-weight:700;margin-bottom:8px;color:var(--green)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts span{display:inline-block;padding:9px 14px;border-radius:999px;background:var(--chip);border:1px solid var(--line);cursor:pointer;font-size:15px}
+.opts input:checked+span{background:var(--green);color:var(--bg);border-color:var(--green);font-weight:600}
+.opts input:focus-visible+span{outline:2px solid var(--red)}
+.stars{display:flex;gap:6px}
+.stars button{background:none;border:0;font-size:38px;line-height:1;cursor:pointer;color:var(--line);padding:0}
+.stars button.on{color:#f2a900}
+input[type=text],input[type=tel],textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:84px;resize:vertical}
+.send{width:100%;padding:15px;border:0;border-radius:12px;background:#25d366;color:#05301a;font-size:17px;font-weight:700;cursor:pointer}
+.note{font-size:13px;text-align:center;opacity:.75;margin-top:10px}
+.err{color:var(--red);font-size:14px;margin:0 0 10px;display:none;text-align:center}
+.grp{font-size:13px;font-weight:600;opacity:.7;margin:10px 0 6px;text-transform:uppercase;letter-spacing:.04em}
+.grp:first-child{margin-top:0}
+.fld{display:block;font-size:14px;font-weight:600;margin:10px 0 4px}
+.fld:first-of-type{margin-top:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>The Brunch Company</h1>
+<p class="sub">How was your meal? 😊</p>
+
+<div class="card"><div class="q">What did you try?</div>
+<div id="items">
+<div class="grp">Parathas</div><div class="opts">
+<label><input type="checkbox" value="Aloo Paratha"><span>Aloo Paratha</span></label>
+<label><input type="checkbox" value="Gobi Paratha"><span>Gobi Paratha</span></label>
+<label><input type="checkbox" value="Paneer Paratha"><span>Paneer Paratha</span></label>
+</div>
+<div class="grp">Mains</div><div class="opts">
+<label><input type="checkbox" value="Aloo Puri"><span>Aloo Puri</span></label>
+<label><input type="checkbox" value="Amritsari Nutri (Soya) with Kulcha"><span>Amritsari Nutri (Soya) with Kulcha</span></label>
+<label><input type="checkbox" value="Choley Bhature"><span>Choley Bhature</span></label>
+<label><input type="checkbox" value="Dosa with Chutney"><span>Dosa with Chutney</span></label>
+<label><input type="checkbox" value="Masala Dosa with Chutney"><span>Masala Dosa with Chutney</span></label>
+<label><input type="checkbox" value="Poha"><span>Poha</span></label>
+<label><input type="checkbox" value="Sabudana Khichdi"><span>Sabudana Khichdi</span></label>
+</div>
+<div class="grp">Drinks</div><div class="opts">
+<label><input type="checkbox" value="Tea"><span>Tea</span></label>
+<label><input type="checkbox" value="Nimbu Pani"><span>Nimbu Pani</span></label>
+</div>
+</div></div>
+
+<div class="card"><div class="q">Overall rating</div>
+<div class="stars" id="stars" role="radiogroup" aria-label="Overall rating"></div></div>
+
+<div class="card"><div class="q">Portion size</div>
+<div class="opts" data-name="portion">
+<label><input type="radio" name="portion" value="Too little"><span>Too little</span></label>
+<label><input type="radio" name="portion" value="Just right"><span>Just right</span></label>
+<label><input type="radio" name="portion" value="Too much"><span>Too much</span></label>
+</div></div>
+
+<div class="card"><div class="q">Would you order again?</div>
+<div class="opts">
+<label><input type="radio" name="again" value="Definitely"><span>Definitely 😍</span></label>
+<label><input type="radio" name="again" value="Maybe"><span>Maybe</span></label>
+<label><input type="radio" name="again" value="Not really"><span>Not really</span></label>
+</div></div>
+
+<div class="card"><div class="q">How was the taste?</div>
+<div class="opts">
+<label><input type="radio" name="taste" value="Loved it"><span>Loved it 😋</span></label>
+<label><input type="radio" name="taste" value="Good"><span>Good</span></label>
+<label><input type="radio" name="taste" value="Okay"><span>Okay</span></label>
+<label><input type="radio" name="taste" value="Needs improvement"><span>Needs improvement</span></label>
+</div></div>
+
+<div class="card"><label class="q" for="cmt">Your feedback</label>
+<textarea id="cmt" placeholder="What you loved, what could be better, what to cook next… (add your name if you like)"></textarea></div>
+
+<div class="card"><div class="q">About you</div>
+<label class="fld" for="nm">Name</label>
+<input type="text" id="nm" autocomplete="name">
+<label class="fld" for="soc">Society</label>
+<input type="text" id="soc">
+<div class="two"><div><label class="fld" for="flat">Flat no.</label><input type="text" id="flat"></div>
+<div><label class="fld" for="ph">Contact number</label><input type="tel" id="ph" inputmode="tel" autocomplete="tel"></div></div></div>
+
+<p class="err" id="err">Please give a star rating first ⭐</p>
+<button class="send" id="send">Send feedback on WhatsApp</button>
+<p class="note">Tapping send opens WhatsApp with your feedback ready to go. Thank you! 🙏</p>
+</div>
+
+<script>
+/* Put her WhatsApp number here with country code, digits only. Example: 919876543210 */
+var WA_NUMBER='919845938868';
+var rating=0, box=document.getElementById('stars');
+for(var i=1;i<=5;i++){(function(n){var b=document.createElement('button');b.type='button';b.textContent='★';b.setAttribute('aria-label',n+' star');
+b.onclick=function(){rating=(rating===n)?0:n;paint();document.getElementById('err').style.display='none'};box.appendChild(b)})(i)}
+function paint(){[].forEach.call(box.children,function(b,k){b.className=k<rating?'on':''})}
+function val(n){var e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:''}
+document.getElementById('send').onclick=function(){
+ if(!rating){document.getElementById('err').style.display='block';return}
+ var items=[].map.call(document.querySelectorAll('#items input:checked'),function(e){return e.value}).join(', ');
+ var L=['*The Brunch Company – Feedback* 🍽️'];
+ if(items)L.push('Tried: '+items);
+ L.push('Rating: '+'⭐'.repeat(rating)+' ('+rating+'/5)');
+ if(val('portion'))L.push('Portion: '+val('portion'));
+ if(val('again'))L.push('Order again: '+val('again'));
+ if(val('taste'))L.push('Taste: '+val('taste'));
+ var c=document.getElementById('cmt').value.trim();
+ if(c)L.push('Feedback: '+c);
+ function g(i){return document.getElementById(i).value.trim()}
+ if(g('nm'))L.push('Name: '+g('nm'));
+ if(g('soc'))L.push('Society: '+g('soc'));
+ if(g('flat'))L.push('Flat no: '+g('flat'));
+ if(g('ph'))L.push('Contact: '+g('ph'));
+ var to=WA_NUMBER.replace(/\D/g,'');try{var q=(new URLSearchParams(location.search).get('to')||'').replace(/\D/g,'');if(q)to=q}catch(e){}
+ window.open('https://wa.me/'+to+'?text='+encodeURIComponent(L.join('\n')),'_blank');
+};
+</script>
+</body>
+</html>
